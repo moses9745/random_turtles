@@ -1,0 +1,64 @@
+# Author: David Morris 
+# 9-10-19
+# This program features two turtles (50 units apart) that move at random.
+# This program will end if the turtle exits the screen, or if turtles touch.
+
+# Any use of this file without expressed permission by the author is in violation of copyrights. 
+
+
+import random
+import turtle
+
+def isInScreen(win,turt):
+    ''' Setting the screen boundaries '''
+    leftBound = -win.window_width() / 2
+    rightBound = win.window_width() / 2
+    topBound = win.window_height() / 2
+    bottomBound = -win.window_height() / 2
+
+    turtleX = turt.xcor()
+    turtleY = turt.ycor()
+    second_turtleX = turt.xcor() + 50
+    second_turtleY = turt.ycor() + 50
+
+    stillIn = True
+    if turtleX > rightBound or turtleX < leftBound:
+        stillIn = False
+    if turtleY > topBound or turtleY < bottomBound:
+        stillIn = False
+
+    return stillIn
+
+def main():
+    ''' Setting turtle requirements '''
+    wn = turtle.Screen()
+    # Define your turtles here
+    june = turtle.Turtle()
+    dave = turtle.Turtle() # Creating second turtle
+
+
+    june.shape('turtle') # Turtle actions
+    dave.shape('turtle')
+    june.speed(10) # Modifying turtle speed
+    dave.speed(10)
+    
+    while isInScreen(wn,june):
+        coin = random.randrange(0, 2)
+        if coin == 0:
+            june.left(90) 
+            if coin == 1:
+              dave.rt(90)
+            else:
+              dave.lt(90)
+        else:
+            june.right(90) 
+            # dave.lt(90)
+
+        june.forward(50) 
+        dave.fd(50)
+
+
+
+    wn.exitonclick()
+
+main()
